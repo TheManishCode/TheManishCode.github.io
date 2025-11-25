@@ -1,75 +1,69 @@
-const output = document.getElementById("output");
+const output = document.getElementById("terminal-output");
 const input = document.getElementById("commandInput");
-const terminal = document.getElementById("terminal");
 
-function print(text) {
-    output.innerHTML += text + "\n";
-    // Scroll the terminal window to the bottom, not the whole page
-    terminal.scrollTop = terminal.scrollHeight;
+// Helper function to print text with optional class for color
+function print(text, className = "") {
+    const line = document.createElement("div");
+    line.textContent = text;
+    if (className) line.classList.add(className);
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
 }
 
+// Commands Data
 const commands = {
     help: `
-Available Commands:
-  help       → list of commands
-  whoami     → your intro
-  skills     → programming skills
-  projects   → GitHub projects
-  socials    → your links
-  contact    → email / telegram
-  experience → experience details
-  education  → education history
-  quote      → random quote
-  ascii      → ascii art
-  clear      → clears screen
+Available commands:
+  whoami     - User introduction
+  skills     - Technical capabilities
+  projects   - GitHub repositories
+  socials    - Connect links
+  contact    - Communication channels
+  clear      - Clear terminal output
 `,
+
     whoami: `
-Name: Manish
-Role: Developer / Security Enthusiast
-Location: India
-About: Passionate about coding, cybersecurity, and building cool tools.
+User: Manish
+Role: Developer / Security Researcher
+Status: Online
+------------------------------------
+Passionate about cybersecurity, tool development, 
+and exploring the depths of the web.
 `,
+
     skills: `
-Languages: Python, JavaScript, C, Bash
-Tools: Git, Linux, BurpSuite, Nmap
-Special: Terminal UI Designs, Automation, OSINT
+[Languages]  Python, JavaScript, C, Bash
+[Tools]      Git, Docker, BurpSuite, Metasploit
+[Focus]      Automation, Web Security, OSINT
 `,
+
     projects: `
-GitHub Projects:
-- https://github.com/TheManishCode
+- File_Validator (Flutter, Secure Hash)
+- Encrypted_Messenger (FastAPI, React)
+- TheListeningLibrary (Audiobook Platform)
+- Check GitHub for more...
 `,
+
     socials: `
-Instagram: https://instagram.com/
-GitHub: https://github.com/TheManishCode
-Telegram: https://t.me/
+GitHub:    https://github.com/TheManishCode
+Instagram: @your_handle
+Telegram:  @your_handle
 `,
+
     contact: `
 Email: themanishcode@gmail.com
-Telegram: @your_telegram
 `,
-    experience: `
-• Built several automation tools
-• Experience in Pentesting labs
-• Completed multiple cybersecurity projects
-`,
-    education: `
-• BCA (in progress)
-• Self-taught security researcher
-`,
-    ascii: `
-███╗   ███╗ █████╗ ███╗   ██╗██╗██╗  ██╗██╗
-████╗ ████║██╔══██╗████╗  ██║██║██║ ██╔╝██║
-██╔████╔██║███████║██╔██╗ ██║██║█████╔╝ ██║
-██║╚██╔╝██║██╔══██║██║╚██╗██║██║██╔═██╗ ██║
-██║ ╚═╝ ██║██║  ██║██║ ╚████║██║██║  ██╗██║
-╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝╚═╝
-`
 };
 
+// Handle Input
 input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-        const cmd = input.value.trim();
-        print(`guest@manish:~$ ${cmd}`);
+        const cmd = input.value.trim().toLowerCase();
+        
+        // Print the command line like: > help
+        const cmdLine = document.createElement("div");
+        cmdLine.innerHTML = `<span class="prompt">></span> ${cmd}`;
+        output.appendChild(cmdLine);
 
         if (cmd === "clear") {
             output.innerHTML = "";
@@ -78,17 +72,28 @@ input.addEventListener("keydown", function (e) {
             print(commands[cmd]);
         } 
         else if (cmd !== "") {
-            print(`Command not found: ${cmd}\nType 'help' to see available commands.`);
+            print(`Command '${cmd}' not found. Type 'help' for list.`, "error");
         }
 
         input.value = "";
+        output.scrollTop = output.scrollHeight;
     }
 });
 
-// Auto-run commands on startup
-window.onload = function() {
-    print(commands.ascii);
-    print(commands.whoami);
-    print("\nType 'help' to see available commands.\n");
+// Startup Sequence
+window.onload = async function() {
+    input.disabled = true; // Disable input during startup
+    
+    print("Connecting to Manish Mainframe...", "highlight");
+    await new Promise(r => setTimeout(r, 800));
+    
+    print("Connection established. Bypassing security protocols...", "highlight");
+    await new Promise(r => setTimeout(r, 1000));
+    
+    print("Authentication successful. Welcome, GUEST.", "success");
+    print("--------------------------------------------------");
+    print("Type 'help' to see a list of available commands.");
+    
+    input.disabled = false;
     input.focus();
 };
