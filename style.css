@@ -1,23 +1,31 @@
 body {
     background: #0d0d0d;
     margin: 0;
-    font-family: monospace;
+    font-family: monospace; /* Standard terminal font */
     color: #00ff90;
+    overflow: hidden; /* Prevent double scrollbars */
 }
 
 #terminal {
     padding: 20px;
     height: 100vh;
     box-sizing: border-box;
+    overflow-y: auto; /* Allows scrolling inside the terminal */
+}
+
+#output {
+    white-space: pre-wrap; /* Preserves formatting/newlines from JS */
+    margin-bottom: 10px;
+}
+
+#input-line {
+    display: flex;
+    align-items: center;
 }
 
 .prompt {
     color: #00ff90;
-}
-
-#output {
-    white-space: pre-wrap;
-    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 #commandInput {
@@ -25,10 +33,12 @@ body {
     border: none;
     outline: none;
     color: #00ff90;
-    width: 80%;
+    flex-grow: 1;
     font-size: 16px;
+    font-family: inherit; /* IMPORTANT: Makes input font monospace */
 }
 
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
