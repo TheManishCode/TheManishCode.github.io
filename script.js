@@ -26,7 +26,8 @@ Available commands:
 
     whoami: `
 User: Manish
-Role: Developer / Security Researcher
+Role: CS Undergrad (Final Year)
+Focus: AI/ML & Security
 Status: Online
 ------------------------------------
 Passionate about cybersecurity, tool development, 
@@ -34,22 +35,22 @@ and exploring the depths of the web.
 `,
 
     skills: `
-[Languages]  Python, JavaScript, C, Bash
+[Languages]  Python, JavaScript, C, c++, oBash
 [Tools]      Git, Docker, BurpSuite, Metasploit
 [Focus]      Automation, Web Security, OSINT
 `,
 
     projects: `
-- File_Validator (Flutter, Secure Hash)
-- Encrypted_Messenger (FastAPI, React)
-- TheListeningLibrary (Audiobook Platform)
+- Red-vs-Blue-Sim (Python, HTML)
+- Insecure-Coffee-Shop (Ejs, JavaScript, CSS)
+- 
 - Check GitHub for more...
 `,
 
     socials: `
-GitHub:    https://github.com/TheManishCode
-Instagram: @your_handle
-Telegram:  @your_handle
+GitHub: https://github.com/TheManishCode
+Youtube: '*'
+LinkedIn: '*'
 `,
 
     contact: `
