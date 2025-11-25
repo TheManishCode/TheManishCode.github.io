@@ -48,6 +48,7 @@ and exploring the depths of the web.
 `,
 
     socials: `
+GitHub: https://github.com/rixscx
 GitHub: https://github.com/TheManishCode
 Youtube: '*'
 LinkedIn: '*'
