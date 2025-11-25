@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manish Terminal (Windowed Version)</title>
+    <title>Manish Mainframe</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="terminal-window">
-    <div class="title-bar">
-        <div class="buttons">
-            <div class="mac-btn close"></div>
-            <div class="mac-btn minimize"></div>
-            <div class="mac-btn zoom"></div>
+<div class="terminal-container">
+    <div id="terminal-output">
         </div>
-        <p class="title">guest@manish: ~</p>
-    </div>
-    <div id="terminal">
-        <div id="output"></div>
-        <div id="input-line">
-            <span class="prompt">guest@manish:~$ </span>
-            <input type="text" id="commandInput" autofocus autocomplete="off">
-        </div>
+    
+    <div class="input-bar">
+        <span class="prompt">&gt;</span>
+        <input type="text" id="commandInput" autofocus autocomplete="off">
     </div>
 </div>
 
