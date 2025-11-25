@@ -1,9 +1,10 @@
 const output = document.getElementById("output");
 const input = document.getElementById("commandInput");
+const terminal = document.getElementById("terminal");
 
 function print(text) {
     output.innerHTML += text + "\n";
-    window.scrollTo(0, document.body.scrollHeight);
+    terminal.scrollTop = terminal.scrollHeight; // Auto-scroll to bottom
 }
 
 const commands = {
@@ -62,7 +63,7 @@ Telegram: @your_telegram
 • Self-taught security researcher
 `,
 
-    quote() {
+    quote: function() {
         const list = [
             "Stay anonymous, stay safe.",
             "Code, break, learn, repeat.",
@@ -84,7 +85,9 @@ Telegram: @your_telegram
 input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
         const cmd = input.value.trim();
-        print(`guest@manish:~$ ${cmd}`);
+        
+        // Print the command usage line
+        print(`<span class="prompt">guest@manish:~$</span> ${cmd}`);
 
         if (cmd === "clear") {
             output.innerHTML = "";
@@ -96,10 +99,18 @@ input.addEventListener("keydown", function (e) {
                 print(commands[cmd]);
             }
         } 
-        else {
+        else if (cmd !== "") {
             print(`Command not found: ${cmd}\nType 'help' to see available commands.`);
         }
 
         input.value = "";
     }
 });
+
+// --- NEW: Initialize Terminal ---
+window.onload = function() {
+    print(commands.ascii);
+    print("Welcome to Manish's Terminal Portfolio.");
+    print("Type 'help' to see available commands.\n");
+    input.focus();
+};
