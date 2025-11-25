@@ -1,79 +1,76 @@
+/* Fonts - using a system stack for that crisp console look */
 body {
-    background-color: #1a1a1a; /* Dark gray background outside the terminal */
+    background-color: #050505; /* Deep black background for the page */
     margin: 0;
-    font-family: 'Courier New', monospace;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    height: 100vh;           /* Full screen height */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #c9d1d9; /* Soft gray text */
 }
 
-/* The "Physical" Window Box */
-.terminal-window {
-    width: 800px;
-    height: 550px;
-    background-color: #0d0d0d; /* Black terminal background */
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Drop shadow */
-    overflow: hidden;
+/* The Main Window */
+.terminal-container {
+    width: 900px;
+    height: 600px;
+    background-color: #0d1117; /* Dark slate for terminal bg */
+    border: 1px solid #30363d; /* Subtle gray border */
+    border-radius: 6px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
-    border: 1px solid #333;
+    overflow: hidden;
 }
 
-/* The Top Bar (Title and Buttons) */
-.title-bar {
-    background-color: #2d2d2d;
+/* The Output Area (Top part) */
+#terminal-output {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Preserves formatting but wraps long lines */
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Scrollbar styling */
+#terminal-output::-webkit-scrollbar {
+    width: 8px;
+}
+#terminal-output::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+}
+
+/* The Input Area (Bottom Bar) */
+.input-bar {
+    background-color: #161b22; /* Slightly lighter bar at the bottom */
     padding: 10px 15px;
+    border-top: 1px solid #30363d;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #333;
-    position: relative;
 }
 
-.buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.mac-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.close { background-color: #ff5f56; }
-.minimize { background-color: #ffbd2e; }
-.zoom { background-color: #27c93f; }
-
-.title {
-    color: #999;
-    font-size: 14px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); /* Center the title text */
-    margin: 0;
-}
-
-/* The Actual Terminal Area */
-#terminal {
-    padding: 20px;
-    flex-grow: 1;
-    overflow-y: auto; /* Scroll only inside the box */
-    color: #00ff90;
-}
-
+/* The Prompt symbol (>) */
 .prompt {
-    color: #00ff90;
-    text-shadow: 0 0 5px rgba(0, 255, 144, 0.5);
+    color: #238636; /* Green prompt like the screenshot */
+    margin-right: 10px;
+    font-weight: bold;
 }
 
+/* The actual input field */
 #commandInput {
     background: transparent;
     border: none;
     outline: none;
-    color: #00ff90;
+    color: #c9d1d9;
     font-family: inherit;
-    font-size: inherit;
-    width: 50%;
+    font-size: 14px;
+    flex-grow: 1;
+    width: 100%;
 }
+
+/* Utilities for coloring text in JS */
+.highlight { color: #58a6ff; } /* Blue for commands */
+.success { color: #238636; }   /* Green for success messages */
+.error { color: #f85149; }     /* Red for errors */
