@@ -35,7 +35,7 @@ and exploring the depths of the web.
 `,
 
     skills: `
-[Languages]  Python, JavaScript, C, c++, oBash
+[Languages]  Python, JavaScript, C, C++, oBash
 [Tools]      Git, Docker, BurpSuite, Metasploit
 [Focus]      Automation, Web Security, OSINT
 `,
