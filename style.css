@@ -1,31 +1,63 @@
 body {
-    background: #0d0d0d;
+    background: #1a1a1a; /* A slightly lighter background for the page */
     margin: 0;
-    font-family: monospace; /* Standard terminal font */
+    font-family: monospace;
     color: #00ff90;
-    overflow: hidden; /* Prevent double scrollbars */
+    /* Center the terminal window */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.terminal-window {
+    width: 800px;  /* Fixed width */
+    height: 500px; /* Fixed height */
+    background: #0d0d0d; /* Terminal background color */
+    border: 1px solid #333;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* 3D shadow effect */
+    overflow: hidden; /* Clip content to rounded corners */
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    background: #2a2a2a; /* Lighter bar at the top */
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    color: #ccc;
+    font-size: 14px;
+    user-select: none;
+}
+
+.title-bar .title {
+    font-weight: bold;
+}
+
+.title-bar .close-btn {
+    color: #ff5f56; /* Red for the 'X' */
+    font-weight: bold;
+    cursor: not-allowed; /* Just for looks, doesn't close the window */
 }
 
 #terminal {
     padding: 20px;
-    height: 100vh;
-    box-sizing: border-box;
+    flex-grow: 1; /* Fills the remaining space below the title bar */
     overflow-y: auto; /* Allows scrolling inside the terminal */
-}
-
-#output {
-    white-space: pre-wrap; /* Preserves formatting/newlines from JS */
-    margin-bottom: 10px;
-}
-
-#input-line {
-    display: flex;
-    align-items: center;
+    box-sizing: border-box;
 }
 
 .prompt {
     color: #00ff90;
-    margin-right: 10px;
+}
+
+#output {
+    white-space: pre-wrap;
+    margin-bottom: 10px;
 }
 
 #commandInput {
@@ -33,15 +65,19 @@ body {
     border: none;
     outline: none;
     color: #00ff90;
-    flex-grow: 1;
+    width: calc(100% - 130px); /* Adjust width based on prompt length */
     font-size: 16px;
-    font-family: inherit; /* IMPORTANT: Makes input font monospace */
+    font-family: monospace;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
+/* Custom Scrollbar for the terminal */
+#terminal::-webkit-scrollbar {
     width: 8px;
 }
-::-webkit-scrollbar-thumb {
+#terminal::-webkit-scrollbar-thumb {
     background: #00ff90;
+    border-radius: 4px;
+}
+#terminal::-webkit-scrollbar-track {
+    background: transparent;
 }
