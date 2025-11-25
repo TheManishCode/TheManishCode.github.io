@@ -1,103 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manish Interactive Terminal</title>
-  <style>
-    body {
-      background: #0a0a0a;
-      color: #00ff6a;
-      font-family: monospace;
-      margin: 0;
-      padding: 0;
-    }
-    #terminal {
-      width: 100%;
-      height: 100vh;
-      padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
-      white-space: pre-wrap;
-    }
-    .input-line { display: flex; }
-    .prompt { color: #00ff6a; margin-right: 6px; }
-    input {
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #00ff6a;
-      font-family: monospace;
-      font-size: 16px;
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manish Terminal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="terminal"></div>
-  <script>
-    const terminal = document.getElementById('terminal');
 
-    const commands = {
-      help: `Available commands:\nhelp\nwhoami\nskills\nprojects\nsocials\ncontact\nexperience\neducation\nquote\nascii\nclear`,
-      whoami: `Manish P — Developer, Automation Enthusiast, Creator`,
-      skills: `Python, JavaScript, Node.js, React, Bash, Linux, Git, FFmpeg`,
-      projects: `audio-automation/\nvideo-toolkit/\nweb-utils/\nnovel-reader/`,
-      socials: `Instagram: yourid\nTelegram: yourusername\nGitHub: github.com/yourname`,
-      contact: `Email: your-email@example.com\nTelegram: @yourusername`,
-      experience: `3+ years building automation tools, scripts, and web utilities`,
-      education: `B.Tech — Computer Science (or your details)`,
-      quote: `"Code is like humor. When you have to explain it, it's bad."`,
-      ascii: `
- __  __             _     _     
-|  \/  | __ _ _ __ (_)___| |__  
-| |\/| |/ _` | '_ \| / __| '_ \ 
-| |  | | (_| | | | | \__ \ | | |
-|_|  |_|\__,_|_| |_|_|___/_| |_|
-`,
-    };
+<div id="terminal">
+    <div id="output"></div>
+    <div id="input-line">
+        <span class="prompt">guest@manish:~$ </span>
+        <input type="text" id="commandInput" autofocus autocomplete="off">
+    </div>
+</div>
 
-    function addLine(text) {
-      terminal.innerHTML += text + "\n";
-      terminal.scrollTop = terminal.scrollHeight;
-    }
-
-    function createInput() {
-      const inputWrapper = document.createElement('div');
-      inputWrapper.className = 'input-line';
-
-      const prompt = document.createElement('span');
-      prompt.className = 'prompt';
-      prompt.textContent = 'manish@terminal:~$';
-
-      const input = document.createElement('input');
-
-      input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          const cmd = input.value.trim();
-          addLine(`manish@terminal:~$ ${cmd}`);
-
-          if (cmd === 'clear') {
-            terminal.innerHTML = '';
-          } else if (commands[cmd]) {
-            addLine(commands[cmd]);
-          } else {
-            addLine(`Command not found: ${cmd}`);
-          }
-
-          inputWrapper.remove();
-          createInput();
-        }
-      });
-
-      inputWrapper.appendChild(prompt);
-      inputWrapper.appendChild(input);
-      terminal.appendChild(inputWrapper);
-      input.focus();
-    }
-
-    addLine("Interactive Terminal Loaded. Type 'help' to begin.\n");
-    createInput();
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
