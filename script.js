@@ -4,7 +4,7 @@ const terminal = document.getElementById("terminal");
 
 function print(text) {
     output.innerHTML += text + "\n";
-    // Scroll the terminal div to the bottom
+    // Scroll the terminal window to the bottom, not the whole page
     terminal.scrollTop = terminal.scrollHeight;
 }
 
@@ -23,56 +23,39 @@ Available Commands:
   ascii      → ascii art
   clear      → clears screen
 `,
-
     whoami: `
 Name: Manish
 Role: Developer / Security Enthusiast
 Location: India
 About: Passionate about coding, cybersecurity, and building cool tools.
 `,
-
     skills: `
 Languages: Python, JavaScript, C, Bash
 Tools: Git, Linux, BurpSuite, Nmap
 Special: Terminal UI Designs, Automation, OSINT
 `,
-
     projects: `
 GitHub Projects:
 - https://github.com/TheManishCode
 `,
-
     socials: `
 Instagram: https://instagram.com/
 GitHub: https://github.com/TheManishCode
 Telegram: https://t.me/
 `,
-
     contact: `
 Email: themanishcode@gmail.com
 Telegram: @your_telegram
 `,
-
     experience: `
 • Built several automation tools
 • Experience in Pentesting labs
 • Completed multiple cybersecurity projects
 `,
-
     education: `
 • BCA (in progress)
 • Self-taught security researcher
 `,
-
-    quote() {
-        const list = [
-            "Stay anonymous, stay safe.",
-            "Code, break, learn, repeat.",
-            "Hacking is an art of curiosity."
-        ];
-        return list[Math.floor(Math.random() * list.length)];
-    },
-
     ascii: `
 ███╗   ███╗ █████╗ ███╗   ██╗██╗██╗  ██╗██╗
 ████╗ ████║██╔══██╗████╗  ██║██║██║ ██╔╝██║
@@ -92,11 +75,7 @@ input.addEventListener("keydown", function (e) {
             output.innerHTML = "";
         }
         else if (commands[cmd]) {
-            if (typeof commands[cmd] === "function") {
-                print(commands[cmd]());
-            } else {
-                print(commands[cmd]);
-            }
+            print(commands[cmd]);
         } 
         else if (cmd !== "") {
             print(`Command not found: ${cmd}\nType 'help' to see available commands.`);
@@ -106,7 +85,7 @@ input.addEventListener("keydown", function (e) {
     }
 });
 
-// Auto-run commands on load to fix the blank screen issue
+// Auto-run commands on startup
 window.onload = function() {
     print(commands.ascii);
     print(commands.whoami);
