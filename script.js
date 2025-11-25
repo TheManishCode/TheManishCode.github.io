@@ -1,9 +1,11 @@
 const output = document.getElementById("output");
 const input = document.getElementById("commandInput");
+const terminal = document.getElementById("terminal");
 
 function print(text) {
     output.innerHTML += text + "\n";
-    window.scrollTo(0, document.body.scrollHeight);
+    // Scroll the terminal div to the bottom
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
 const commands = {
@@ -84,7 +86,7 @@ Telegram: @your_telegram
 input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
         const cmd = input.value.trim();
-        print(`guest@manish:~$ ${cmd}`); // Print the command user typed
+        print(`guest@manish:~$ ${cmd}`);
 
         if (cmd === "clear") {
             output.innerHTML = "";
@@ -96,7 +98,7 @@ input.addEventListener("keydown", function (e) {
                 print(commands[cmd]);
             }
         } 
-        else if (cmd !== "") { // Ignore empty enters
+        else if (cmd !== "") {
             print(`Command not found: ${cmd}\nType 'help' to see available commands.`);
         }
 
@@ -104,10 +106,10 @@ input.addEventListener("keydown", function (e) {
     }
 });
 
-// --- NEW: AUTO-RUN COMMANDS ON LOAD ---
+// Auto-run commands on load to fix the blank screen issue
 window.onload = function() {
-    print(commands.ascii);      // Show the banner
-    print(commands.whoami);     // Show the intro
-    print("\nType 'help' to see available commands.\n"); // Instructions
-    input.focus();              // Focus input so you can type immediately
+    print(commands.ascii);
+    print(commands.whoami);
+    print("\nType 'help' to see available commands.\n");
+    input.focus();
 };
