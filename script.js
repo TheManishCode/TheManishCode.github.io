@@ -4,13 +4,13 @@ const input = document.getElementById("commandInput");
 // Helper function to print text with optional class for color
 function print(text, className = "") {
     const line = document.createElement("div");
-    line.textContent = text;
-    if (className) line.classList.add(className);
+    line.className = className;
+    line.textContent = text; 
     output.appendChild(line);
     output.scrollTop = output.scrollHeight;
 }
 
-// Commands Data
+// Data & Logic
 const commands = {
     help: `
 Available commands:
@@ -19,6 +19,8 @@ Available commands:
   projects   - GitHub repositories
   socials    - Connect links
   contact    - Communication channels
+  ls         - List directory contents
+  quote      - Display a random quote
   clear      - Clear terminal output
 `,
 
@@ -53,6 +55,31 @@ Telegram:  @your_handle
     contact: `
 Email: themanishcode@gmail.com
 `,
+
+    // LS Command: Mimics a Linux file listing
+    ls: `
+drwxr-xr-x  guest  guest  4096  Nov 25 12:00  .
+drwxr-xr-x  root   root   4096  Nov 25 00:00  ..
+-rwxr-xr-x  guest  guest   512  Nov 25 12:01  whoami
+-rw-r--r--  guest  guest  1024  Nov 25 12:02  skills.md
+-rw-r--r--  guest  guest  2048  Nov 25 12:03  projects.txt
+-rw-r--r--  guest  guest   128  Nov 25 12:04  contact.info
+-r--------  admin  admin    64  Nov 25 00:00  secret_key.pem
+`,
+
+    // Quote Command: Dynamic function
+    quote: function() {
+        const quotes = [
+            "\"Talk is cheap. Show me the code.\" - Linus Torvalds",
+            "\"Programs must be written for people to read, and only incidentally for machines to execute.\" - Abelson & Sussman",
+            "\"Security is not a product, but a process.\" - Bruce Schneier",
+            "\"The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards.\" - Gene Spafford",
+            "\"Hacking is not about the illegal act, it's about the art of curiosity.\" - Anonymous",
+            "\"It’s not a bug; it’s an undocumented feature.\"",
+            "\"First, solve the problem. Then, write the code.\""
+        ];
+        return quotes[Math.floor(Math.random() * quotes.length)];
+    }
 };
 
 // Handle Input
@@ -69,7 +96,12 @@ input.addEventListener("keydown", function (e) {
             output.innerHTML = "";
         }
         else if (commands[cmd]) {
-            print(commands[cmd]);
+            // Check if it's a dynamic function (like quote) or static text
+            if (typeof commands[cmd] === "function") {
+                print(commands[cmd]());
+            } else {
+                print(commands[cmd]);
+            }
         } 
         else if (cmd !== "") {
             print(`Command '${cmd}' not found. Type 'help' for list.`, "error");
@@ -82,7 +114,7 @@ input.addEventListener("keydown", function (e) {
 
 // Startup Sequence
 window.onload = async function() {
-    input.disabled = true; // Disable input during startup
+    input.disabled = true; 
     
     print("Connecting to Manish Mainframe...", "highlight");
     await new Promise(r => setTimeout(r, 800));
