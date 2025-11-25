@@ -1,63 +1,71 @@
 body {
-    background: #1a1a1a; /* A slightly lighter background for the page */
+    background-color: #1a1a1a; /* Dark gray background outside the terminal */
     margin: 0;
-    font-family: monospace;
-    color: #00ff90;
-    /* Center the terminal window */
+    font-family: 'Courier New', monospace;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;           /* Full screen height */
 }
 
+/* The "Physical" Window Box */
 .terminal-window {
-    width: 800px;  /* Fixed width */
-    height: 500px; /* Fixed height */
-    background: #0d0d0d; /* Terminal background color */
-    border: 1px solid #333;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* 3D shadow effect */
-    overflow: hidden; /* Clip content to rounded corners */
+    width: 800px;
+    height: 550px;
+    background-color: #0d0d0d; /* Black terminal background */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Drop shadow */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+    border: 1px solid #333;
 }
 
+/* The Top Bar (Title and Buttons) */
 .title-bar {
-    background: #2a2a2a; /* Lighter bar at the top */
-    padding: 8px 15px;
+    background-color: #2d2d2d;
+    padding: 10px 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #333;
-    color: #ccc;
+    position: relative;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.mac-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.close { background-color: #ff5f56; }
+.minimize { background-color: #ffbd2e; }
+.zoom { background-color: #27c93f; }
+
+.title {
+    color: #999;
     font-size: 14px;
-    user-select: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Center the title text */
+    margin: 0;
 }
 
-.title-bar .title {
-    font-weight: bold;
-}
-
-.title-bar .close-btn {
-    color: #ff5f56; /* Red for the 'X' */
-    font-weight: bold;
-    cursor: not-allowed; /* Just for looks, doesn't close the window */
-}
-
+/* The Actual Terminal Area */
 #terminal {
     padding: 20px;
-    flex-grow: 1; /* Fills the remaining space below the title bar */
-    overflow-y: auto; /* Allows scrolling inside the terminal */
-    box-sizing: border-box;
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll only inside the box */
+    color: #00ff90;
 }
 
 .prompt {
     color: #00ff90;
-}
-
-#output {
-    white-space: pre-wrap;
-    margin-bottom: 10px;
+    text-shadow: 0 0 5px rgba(0, 255, 144, 0.5);
 }
 
 #commandInput {
@@ -65,19 +73,7 @@ body {
     border: none;
     outline: none;
     color: #00ff90;
-    width: calc(100% - 130px); /* Adjust width based on prompt length */
-    font-size: 16px;
-    font-family: monospace;
-}
-
-/* Custom Scrollbar for the terminal */
-#terminal::-webkit-scrollbar {
-    width: 8px;
-}
-#terminal::-webkit-scrollbar-thumb {
-    background: #00ff90;
-    border-radius: 4px;
-}
-#terminal::-webkit-scrollbar-track {
-    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    width: 50%;
 }
